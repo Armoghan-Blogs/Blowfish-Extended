@@ -1,0 +1,26 @@
+name = "Blowfish-Extended"
+license = "MIT"
+licenselink = "https://github.com/Armoghan-Blogs/Blowfish-Extended/blob/master/LICENSE"
+description = "A powerful, lightweight theme for Hugo built with Tailwind CSS."
+homepage = "https://github.com/Armoghan-Blogs/Blowfish-Extended"
+demosite = "https://Blowfish-Extended.netlify.app"
+tags = [
+  "blog",
+  "minimal",
+  "responsive",
+  "dark mode",
+  "dark",
+  "light",
+  "tailwind",
+  "personal"
+]
+features = ["syntax highlighting", "dark mode", "emoji", "firebase", "views"]
+
+[author]
+name = "Armoghan-ul-Mohmin"
+homepage = "https://armoghan.netlify.app/"
+
+[original]
+author = "Nuno Coracao"
+homepage = "https://nunocoracao.com/"
+repo = "https://github.com/nunocoracao/blowfish"
