@@ -1,0 +1,27 @@
+{
+  "name": "blowfish-extended",
+  "version": "1.0.0",
+  "description": "Blowfish Extended theme for Hugo",
+  "scripts": {
+    "dev": "hugo server --buildDrafts --buildFuture --buildExpired --gc --logLevel info --watch",
+    "prod": "hugo server --buildDrafts --buildFuture --buildExpired --gc --logLevel info --watch  -e production",
+    "build": "hugo --gc --logLevel info --cleanDestinationDir --minify"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Armoghan-Blogs/Blowfish-Extended.git"
+  },
+  "keywords": [
+    "hugo",
+    "hugo-theme",
+    "tailwind",
+    "Blowfish",
+    "dark-mode"
+  ],
+  "author": "Armoghan-ul-Mohmin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Armoghan-Blogs/Blowfish-Extended/issues"
+  },
+  "homepage": "https://github.com/Armoghan-Blogs/Blowfish-Extended#readme"
+}
