@@ -1,0 +1,74 @@
+global:
+  language: "🇬🇧"
+
+article:
+  anchor_label: "لنک"
+  date: "{{ .Date }}"
+  date_updated: "اپ ڈیٹ کیا گیا: {{ .Date }}"
+  draft: "ڈرافٹ"
+  edit_title: "مواد میں ترمیم کریں"
+  reading_time:
+    one: "{{ .Count }} منٹ"
+    other: "{{ .Count }} منٹ"
+  reading_time_title: "پڑھنے کا وقت"
+  table_of_contents: "موضوعات کا جدول"
+  word_count:
+    one: "{{ .Count }} لفظ"
+    other: "{{ .Count }} لفظ"
+  views:
+    one: "{{ .Count }} دیکھا"
+    other: "{{ .Count }} دیکھے"
+  likes:
+    one: "{{ .Count }} پسندیدہ"
+    other: "{{ .Count }} پسندیدہ"
+  part_of_series: "یہ مضمون ایک سلسلے کا حصہ ہے۔"
+  part: "حصہ"
+  this_article: "یہ مضمون"
+  related_articles: "متعلقہ"
+  zen_mode_title:
+    enable: "زین موڈ فعال کریں"
+    disable: "زین موڈ غیرفعال کریں"
+
+author:
+  byline_title: "مصنف"
+
+code:
+  copy: "کاپی"
+  copied: "کاپی ہوگیا"
+
+error:
+  404_title: "صفحہ نہیں ملا :confused:"
+  404_error: "خطا 404"
+  404_description: "لگتا ہے کہ آپ نے درخواست کی ہوئی صفحہ موجود نہیں ہے۔"
+
+footer:
+  dark_appearance: "تاریک مواد کی صورت میں تبدیل کریں"
+  light_appearance: "روشن مواد کی صورت میں تبدیل کریں"
+  powered_by: "پاورڈ بائی {{ .Hugo }} &amp; {{ .Theme }}"
+
+list:
+  externalurl_title: "باہری ویب سائٹ پر جائیں"
+  no_articles: "ابھی تک کوئی مضامین نہیں ہیں۔"
+
+nav:
+  scroll_to_top_title: "اوپر جائیں"
+  skip_to_main: "اصل مواد پر جائیں"
+
+search:
+  open_button_title: "تلاش کریں (/)"
+  close_button_title: "بند کریں (Esc)"
+  input_placeholder: "تلاش کریں"
+
+sharing:
+  email: "ای میل کے ذریعہ بھیجیں"
+  facebook: "فیس بک پر شیئر کریں"
+  linkedin: "لنکڈ ان پر شیئر کریں"
+  pinterest: "پن پر پن کریں"
+  reddit: "ریڈیٹ پر جمع کریں"
+  twitter: "ٹوئٹر پر شیئر کریں"
+
+shortcode:
+  recent_articles: "حالیہ"
+
+recent:
+  show_more: "مزید دکھائیں"
