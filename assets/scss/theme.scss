@@ -1,2 +1,17 @@
+// Zen Mod Component
+@import "components/zen-mode";
+
 // TAILWINDCSS
 @import "tailwind";
+
+// Theme Speacific Components
+@import "components/themeSpeacific";
+
+// Custom Components
+@import "components/custom";
+
+// Gallery Specific Components
+@import "components/Gallery-Specific";
+
+// Carousel Specific Components
+@import "components/Carousel-Specific";
