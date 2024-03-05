@@ -25,10 +25,31 @@
     "url": "https://github.com/Armoghan-Blogs/Blowfish-Extended/issues"
   },
   "homepage": "https://github.com/Armoghan-Blogs/Blowfish-Extended#readme",
+  "dependencies": {
+    "tailwindcss": "^3.4.1",
+    "tw-elements": "1.1.0",
+    "@tailwindcss/typography": "^0.5.10",
+    "@tailwindcss/forms": "^0.5.7",
+    "chart.js": "^4.4.1",
+    "fuse.js": "^7.0.0",
+    "jquery": "^3.7.1",
+    "katex": "^0.16.9",
+    "packery": "^2.1.2",
+    "puppeteer": "^22.3.0",
+    "typeit": "^8.8.3",
+    "@headlessui/react": "^1.7.18",
+    "@heroicons/react": "^2.1.1",
+    "commander": "^12.0.0"
+  },
   "devDependencies": {
     "npm-check": "^6.0.1",
     "prettier": "^3.2.5",
     "prettier-plugin-go-template": "^0.0.15",
-    "prettier-plugin-tailwindcss": "^0.5.11"
+    "prettier-plugin-tailwindcss": "^0.5.11",
+    "rimraf": "^5.0.5",
+    "vendor-copy": "^3.0.1",
+    "autoprefixer": "^10.4.17",
+    "postcss": "^8.4.32",
+    "postcss-cli": "^11.0.0"
   }
 }
