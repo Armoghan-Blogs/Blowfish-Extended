@@ -1,0 +1,71 @@
+@layer components {
+    .ratio-16-9 {
+        padding-top: 56.25%;
+    } /* 16:9 Aspect Ratio */
+    .ratio-21-9 {
+        padding-top: 42.85%;
+    } /* 21:9 Aspect Ratio */
+    .ratio-32-9 {
+        padding-top: 28.125%;
+    } /* 32:9 Aspect Ratio */
+
+    @screen sm {
+        .sm\:ratio-16-9 {
+            padding-top: 56.25%;
+        } /* 16:9 Aspect Ratio */
+        .sm\:ratio-21-9 {
+            padding-top: 42.85%;
+        } /* 21:9 Aspect Ratio */
+        .sm\:ratio-32-9 {
+            padding-top: 28.125%;
+        } /* 32:9 Aspect Ratio */
+    }
+
+    @screen md {
+        .md\:ratio-16-9 {
+            padding-top: 56.25%;
+        } /* 16:9 Aspect Ratio */
+        .md\:ratio-21-9 {
+            padding-top: 42.85%;
+        } /* 21:9 Aspect Ratio */
+        .md\:ratio-32-9 {
+            padding-top: 28.125%;
+        } /* 32:9 Aspect Ratio */
+    }
+
+    @screen lg {
+        .lg\:ratio-16-9 {
+            padding-top: 56.25%;
+        } /* 16:9 Aspect Ratio */
+        .lg\:ratio-21-9 {
+            padding-top: 42.85%;
+        } /* 21:9 Aspect Ratio */
+        .lg\:ratio-32-9 {
+            padding-top: 28.125%;
+        } /* 32:9 Aspect Ratio */
+    }
+
+    @screen xl {
+        .xl\:ratio-16-9 {
+            padding-top: 56.25%;
+        } /* 16:9 Aspect Ratio */
+        .xl\:ratio-21-9 {
+            padding-top: 42.85%;
+        } /* 21:9 Aspect Ratio */
+        .xl\:ratio-32-9 {
+            padding-top: 28.125%;
+        } /* 32:9 Aspect Ratio */
+    }
+
+    @screen 2xl {
+        .2xl\:ratio-16-9 {
+            padding-top: 56.25%;
+        } /* 16:9 Aspect Ratio */
+        .2xl\:ratio-21-9 {
+            padding-top: 42.85%;
+        } /* 21:9 Aspect Ratio */
+        .2xl\:ratio-32-9 {
+            padding-top: 28.125%;
+        } /* 32:9 Aspect Ratio */
+    }
+}

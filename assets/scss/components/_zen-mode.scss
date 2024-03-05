@@ -1,0 +1,12 @@
+@layer components {
+    #zen-mode-button {
+        @apply cursor-pointer;
+    }
+    .zen-mode {
+        @apply relative;
+    }
+    body.zen-mode-enable #bmc-wbtn,
+    body.zen-mode-enable .author {
+        @apply hidden;
+    }
+}
