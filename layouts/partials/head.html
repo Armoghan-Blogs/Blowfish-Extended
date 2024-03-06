@@ -96,17 +96,17 @@ safeHTML }}
 
 <!-- Favicon Links -->
 <link rel="shortcut icon" href="/Favicons/favicon.ico" />
-<link rel="icon" type="image/x-icon" sizes="16x16 32x32" href="/Favicons/favicon.png" />
-<link rel="icon" sizes="192x192" href="/Favicons/favicon-192.png" />
-<link rel="icon" href="/Favicons/favicon-32.png" sizes="32x32" />
+<link rel="icon" type="image/x-icon" sizes="16x16" href="/Favicons/favicon-16x16.png" />
+<link rel="icon" sizes="192x192" href="/Favicons/android-chrome-192x192.png" />
+<link rel="icon" href="/Favicons/favicon-32x32.png" sizes="32x32" />
 
 <!-- Apple Touch Icons -->
-<link rel="apple-touch-icon" sizes="180x180" href="/Favicons/favicon-180-precomposed.png" />
-<link rel="apple-touch-icon" sizes="152x152" href="/Favicons/favicon-152-precomposed.png" />
-<link rel="apple-touch-icon" sizes="144x144" href="/Favicons/favicon-144-precomposed.png" />
-<link rel="apple-touch-icon" sizes="120x120" href="/Favicons/favicon-120-precomposed.png" />
-<link rel="apple-touch-icon" sizes="114x114" href="/Favicons/favicon-114-precomposed.png" />
-<link rel="apple-touch-icon" sizes="72x72" href="/Favicons/favicon-72-precomposed.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="/Favicons/apple-touch-icon.png" />
+<link rel="apple-touch-icon" sizes="152x152" href="/Favicons/android-chrome-512x512.png" />
+<link rel="apple-touch-icon" sizes="144x144" href="/Favicons/apple-touch-icon.png" />
+<link rel="apple-touch-icon" sizes="120x120" href="/Favicons/apple-touch-icon.png" />
+<link rel="apple-touch-icon" sizes="114x114" href="/Favicons/apple-touch-icon.png" />
+<link rel="apple-touch-icon" sizes="72x72" href="/Favicons/apple-touch-icon.png" />
 <link rel="apple-touch-icon" href="/Favicons/favicon-57.png" />
 
 {{/* Check if custom favicons partial exists */}}
@@ -338,6 +338,7 @@ safeHTML }}
 <link href="{{ .Permalink }}" rel="alternate" type="application/rss+xml" title="{{ $.Site.Title }}" />
 <link href="{{ .Permalink }}" rel="feed" type="application/rss+xml" title="{{ $.Site.Title }}" />
 {{ end }}
+
 
 <!-- Styles -->
 {{ partialCached "head/css.html" . }}
