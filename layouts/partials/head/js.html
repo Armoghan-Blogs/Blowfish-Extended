@@ -11,9 +11,59 @@
 {{- end }}
 {{- end }}
 
-<!-- Check if image zoom is enabled  -->
-{{ if not .Site.Params.disableImageZoom | default true }}
-{{- with resources.Get "js/zoom.min.js" }}
+{{- with resources.Get "lib/chart/chart.min.js" }}
+{{- if eq hugo.Environment "development" }}
+{{- with . | js.Build }}
+<script src="{{ .RelPermalink }}"></script>
+{{- end }}
+{{- else }}
+{{- $opts := dict "minify" true }}
+{{- with . | js.Build $opts | fingerprint }}
+<script src="{{ .RelPermalink }}" integrity="{{- .Data.Integrity }}" crossorigin="anonymous"></script>
+{{- end }}
+{{- end }}
+{{- end }}
+
+{{/* Load the main JavaScript files */}}
+{{ $jsChart := resources.Get "js/chart.js" }}
+{{ $jsPage := resources.Get "js/page.js" }}
+{{ $jsProcess := resources.Get "js/process.js" }}
+{{ $jsServiceWorker := resources.Get "js/sw.js" }}
+{{ $jsZoom := resources.Get "js/zoom.min.js" }}
+
+{{/* Concatenate the JavaScript files into a single bundle named "scripts.bundle.js" */}}
+{{ $js := slice $jsChart $jsPage $jsProcess $jsServiceWorker $jsZoom | resources.Concat "js/scripts.bundle.js" }}
+
+{{/* Include the JavaScript file based on the environment (development or production) */}}
+{{- with $js }}
+{{- if eq hugo.Environment "development" }}
+{{/* Include the JavaScript file directly in the development environment */}}
+<script defer src="{{ .RelPermalink }}"></script>
+{{- else }}
+{{- with . | minify | fingerprint }}
+{{/* Minify and fingerprint the JavaScript file for the production environment */}}
+<script defer src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous"></script>
+{{- end }}
+{{- end }}
+{{- end }}
+
+<!-- Load search script if enabled -->
+{{ if .Site.Params.enableSearch | default false }}
+
+{{- with resources.Get "lib/fuse/fuse.min.js" }}
+{{- if eq hugo.Environment "development" }}
+{{- with . | js.Build }}
+<script src="{{ .RelPermalink }}"></script>
+{{- end }}
+{{- else }}
+{{- $opts := dict "minify" true }}
+{{- with . | js.Build $opts | fingerprint }}
+<script src="{{ .RelPermalink }}" integrity="{{- .Data.Integrity }}" crossorigin="anonymous"></script>
+{{- end }}
+{{- end }}
+{{- end }}
+
+{{- with resources.Get "js/search.js" }}
 {{- if eq hugo.Environment "development" }}
 {{- with . | js.Build }}
 <script src="{{ .RelPermalink }}"></script>
@@ -27,7 +77,40 @@
 {{- end }}
 {{ end }}
 
-{{- with resources.Get "js/sw.js" }}
+<!-- Load code copy script if enabled -->
+{{ if .Site.Params.enableCodeCopy | default false }}
+{{- with resources.Get "js/code.js" }}
+{{- if eq hugo.Environment "development" }}
+{{- with . | js.Build }}
+<script src="{{ .RelPermalink }}"></script>
+{{- end }}
+{{- else }}
+{{- $opts := dict "minify" true }}
+{{- with . | js.Build $opts | fingerprint }}
+<script src="{{ .RelPermalink }}" integrity="{{- .Data.Integrity }}" crossorigin="anonymous"></script>
+{{- end }}
+{{- end }}
+{{- end }}
+{{ end }}
+
+<!-- Load RTL script if enabled -->
+{{ if .Site.Params.rtl | default false }}
+
+{{- with resources.Get "js/rtl.js" }}
+{{- if eq hugo.Environment "development" }}
+{{- with . | js.Build }}
+<script src="{{ .RelPermalink }}"></script>
+{{- end }}
+{{- else }}
+{{- $opts := dict "minify" true }}
+{{- with . | js.Build $opts | fingerprint }}
+<script src="{{ .RelPermalink }}" integrity="{{- .Data.Integrity }}" crossorigin="anonymous"></script>
+{{- end }}
+{{- end }}
+{{- end }}
+{{ end }}
+
+{{- with resources.Get "js/zen-mode.js" }}
 {{- if eq hugo.Environment "development" }}
 {{- with . | js.Build }}
 <script src="{{ .RelPermalink }}"></script>
