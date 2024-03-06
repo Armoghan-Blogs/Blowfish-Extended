@@ -50,12 +50,6 @@
             "src": "/Favicons/android-chrome-512x512.png",
             "type": "image/png",
             "sizes": "512x512"
-        },
-        {
-            "src": "/Favicons/favicon-57.png"
-        },
-        {
-            "src": "https://blowfish-extended.netlify.app"
         }
     ]
 }
