@@ -1,0 +1,55 @@
+{
+    "name": "Blowfish Extended",
+    "short_name": "Theme",
+    "description": "Hugo Theme For Personal Portfolio and Blogs",
+    "start_url": "/",
+    "scope": "/",
+    "lang": "en",
+    "dir": "auto",
+    "display": "standalone",
+    "orientation": "any",
+    "background_color": "#ffffff",
+    "theme_color": "#ffffff",
+    "screenshots": [
+        {
+            "src": "images/home-page.png",
+            "sizes": "1280x720",
+            "type": "image/png"
+        },
+        {
+            "src": "images/home-profile.png",
+            "sizes": "1280x720",
+            "type": "image/png"
+        }
+    ],
+    "icons": [
+        {
+            "src": "/Favicons/favicon-16x16.png",
+            "type": "image/x-icon",
+            "sizes": "16x16"
+        },
+        {
+            "src": "/Favicons/android-chrome-192x192.png",
+            "type": "image/png",
+            "sizes": "192x192"
+        },
+        {
+            "src": "/Favicons/favicon-32x32.png",
+            "type": "image/png",
+            "sizes": "32x32"
+        },
+        {
+            "src": "/Favicons/favicon.ico"
+        },
+        {
+            "src": "/Favicons/apple-touch-icon.png",
+            "type": "image/png",
+            "sizes": "180x180"
+        },
+        {
+            "src": "/Favicons/android-chrome-512x512.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        }
+    ]
+}
