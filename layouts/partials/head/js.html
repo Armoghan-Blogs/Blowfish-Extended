@@ -11,6 +11,47 @@
 {{- end }}
 {{- end }}
 
+<!-- Check if image zoom is enabled  -->
+{{ if not .Site.Params.disableImageZoom | default true }}
+{{- with resources.Get "js/zoom.min.js" }}
+{{- if eq hugo.Environment "development" }}
+{{- with . | js.Build }}
+<script src="{{ .RelPermalink }}"></script>
+{{- end }}
+{{- else }}
+{{- $opts := dict "minify" true }}
+{{- with . | js.Build $opts | fingerprint }}
+<script src="{{ .RelPermalink }}" integrity="{{- .Data.Integrity }}" crossorigin="anonymous"></script>
+{{- end }}
+{{- end }}
+{{- end }}
+{{ end }}
+
+<!-- Firebase  -->
+{{ with $.Site.Params.firebase }}
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+<script>
+
+    const firebaseConfig = {
+        apiKey: "{{ .apiKey }}",
+        authDomain: "{{ .authDomain }}",
+        projectId: "{{ .projectId }}",
+        storageBucket: "{{ .storageBucket }}",
+        messagingSenderId: "{{ .messagingSenderId }}",
+        appId: "{{ .appId }}",
+        measurementId: "{{ .measurementId }}"
+    };
+
+    var app = firebase.initializeApp(firebaseConfig);
+    var db = firebase.firestore();
+    var auth = firebase.auth();
+
+</script>
+{{ end }}
+
+
 {{ if .Site.Params.Custom.Js }}
 {{- with resources.Get "js/custom.js" }}
 {{- if eq hugo.Environment "development" }}
