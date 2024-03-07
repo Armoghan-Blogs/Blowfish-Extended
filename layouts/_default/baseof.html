@@ -19,7 +19,7 @@
   </main>
 
   <!-- Banner for PWA installation -->
-  <div id="installBanner" class="fixed bottom-0 left-0 right-0 flex items-center justify-center">
+  <div id="installBanner" class="fixed bottom-0 left-0 right-0 flex items-center justify-center" style="display: none;">
     <div
       class="flex max-sm:flex-col items-center justify-center bg-primary-100 text-neutral-900 dark:bg-primary-800 dark:text-neutral px-6 py-3.5 rounded-md font-[sans-serif] my-3">
       <p class="text-base">Get the best experience with our app! Install now.</p>
@@ -37,6 +37,17 @@
   </div>
 
   <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Check if there is a value stored in localStorage
+      const dismissalTimestamp = localStorage.getItem('dismissalTimestamp');
+
+      // If there is no value stored, display the banner
+      if (!dismissalTimestamp) {
+        document.getElementById('installBanner').style.display = 'block';
+      }
+    });
+
+
     let deferredPrompt;
 
     // Function to install the PWA
@@ -97,8 +108,15 @@
       checkBanner();
     });
 
+    // Listen for the appinstalled event to hide the banner after installation
+    window.addEventListener('appinstalled', (event) => {
+      // Hide the banner after the app is installed
+      document.getElementById('installBanner').style.display = 'none';
+    });
+
     // Call checkBanner when the page loads to ensure the banner state is correct
     window.onload = checkBanner;
+
 
   </script>
   <footer>
