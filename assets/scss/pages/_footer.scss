@@ -1,0 +1,32 @@
+@layer components {
+    #site-footer {
+        @apply py-8 print:hidden;
+        nav {
+            @apply flex flex-row pb-4 text-base font-medium text-neutral-500 dark:text-neutral-400;
+            ul {
+                @apply flex flex-col list-none sm:flex-row;
+                li {
+                    @apply flex mb-1 ltr:text-right rtl:text-left sm:mb-0 ltr:sm:mr-7 ltr:sm:last:mr-0 rtl:sm:ml-7 rtl:sm:last:ml-0;
+                    a {
+                        @apply decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2 flex items-center;
+                        span {
+                            @apply mr-1;
+                        }
+                    }
+                }
+            }
+        }
+        div {
+            @apply flex items-center justify-between;
+            p {
+                @apply text-sm text-neutral-500 dark:text-neutral-400;
+            }
+            p {
+                @apply text-xs text-neutral-500 dark:text-neutral-400;
+                a {
+                    @apply hover:underline hover:decoration-primary-400 hover:text-primary-500;
+                }
+            }
+        }
+    }
+}
