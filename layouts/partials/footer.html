@@ -46,15 +46,16 @@
     {{ end }}
 </div>
 
+{{ if not.Site.Params.disableImageZoom | default true }}
 <script>
-    { { if not.Site.Params.disableImageZoom | default true } }
     mediumZoom(document.querySelectorAll("img:not(.nozoom)"), {
         margin: 24,
         background: 'rgba(0,0,0,0.5)',
         scrollOffset: 0,
-    })
-    { { end } }
+    });
 </script>
+{{ end }}
+
 
 <!--  Extend footer - eg. for extra scripts, etc. -->
 {{ if templates.Exists "partials/extend-footer.html" }}
