@@ -51,5 +51,20 @@
             "type": "image/png",
             "sizes": "512x512"
         }
+    ],
+    "shortcuts": [
+        {
+            "name": "Home",
+            "url": "/",
+            "description": "Home Page"
+        },
+        {
+            "name": "Posts",
+            "url": "/posts/",
+            "description": "All Posts"
+        }
+    ],
+    "categories": [
+        "education"
     ]
 }
