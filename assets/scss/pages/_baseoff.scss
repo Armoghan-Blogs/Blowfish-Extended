@@ -1,0 +1,17 @@
+@layer components {
+    #the-top {
+        @apply absolute flex self-center;
+        a {
+            @apply px-3 py-1 text-sm -translate-y-8 rounded-b-lg bg-primary-200 focus:translate-y-0 dark:bg-neutral-600;
+            span {
+                @apply font-bold text-primary-600 ltr:pr-2 rtl:pl-2 dark:text-primary-400;
+            }
+        }
+    }
+    #main {
+        @apply relative flex flex-col grow;
+        #main-content {
+            @apply grow;
+        }
+    }
+}

@@ -11,12 +11,31 @@
 </head>
 
 <body>
-  <header>
-    {{ partial "header.html" . }}
-  </header>
-  <main>
-    {{ block "main" . }}{{ end }}
-  </main>
+
+  <div id="the-top">
+    <a href="#main-content"><span>&darr;</span>{{ i18n "nav.skip_to_main" }}</a>
+  </div>
+  {{ $header := print "partials/header/" .Site.Params.header.layout ".html" }}
+  {{ if templates.Exists $header }}
+  {{ partial $header . }}
+  {{ else }}
+  {{ partial "partials/header/basic.html" . }}
+  {{ end }}
+
+  <div id="main">
+    <main id="main-content">
+      {{ block "main" . }}{{ end }}
+      {{ if and (.Site.Params.footer.showScrollToTop | default true) (gt .WordCount 1) }}
+      {{- partial "scroll-to-top.html" . -}}
+      {{ end }}
+    </main>
+    <footer id="site-footer">
+      {{ partial "footer.html" . }}
+    </footer>
+    {{ if .Site.Params.enableSearch | default false }}
+    {{- partial "search.html" . -}}
+    {{ end }}
+  </div>
 
   <!-- Banner for PWA installation -->
   <div id="installBanner" class="fixed bottom-0 left-0 right-0 flex items-center justify-center" style="display: none;">
@@ -46,7 +65,6 @@
         document.getElementById('installBanner').style.display = 'block';
       }
     });
-
 
     let deferredPrompt;
 
@@ -116,12 +134,7 @@
 
     // Call checkBanner when the page loads to ensure the banner state is correct
     window.onload = checkBanner;
-
-
   </script>
-  <footer id="site-footer">
-    {{ partial "footer.html" . }}
-  </footer>
   {{ partialCached "head/js.html" . }}
 </body>
 
