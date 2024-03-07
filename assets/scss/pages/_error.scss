@@ -1,0 +1,14 @@
+@layer components {
+    #error {
+        @apply mb-3 text-4xl font-extrabold;
+    }
+    #error-para {
+        @apply mt-8 mb-12 text-neutral-400 dark:text-neutral-500;
+    }
+    #error-desc {
+        @apply prose dark:prose-invert;
+        p {
+            @apply prose dark:prose-invert;
+        }
+    }
+}
