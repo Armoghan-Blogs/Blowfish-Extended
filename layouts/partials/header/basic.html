@@ -1,0 +1,149 @@
+<div style="padding-left:0;padding-right:0;padding-top:2px;padding-bottom:3px" id="main-menu" class="main-menu">
+
+    {{ if .Site.Params.Logo }}
+    {{ $logo := resources.Get .Site.Params.Logo }}
+    {{ if $logo }}
+    <div>
+        <a href="{{ "" | relLangURL }}">
+            <span>{{ .Site.Title | markdownify | emojify }}</span>
+            <img src="{{ $logo.RelPermalink }}" width="{{ div $logo.Width 2 }}" height="{{ div $logo.Height 2 }}"
+                alt="{{ .Site.Title }}" class="logo nozoom" />
+        </a>
+    </div>
+    {{ end }}
+    {{- end }}
+
+    <div id="navigation">
+        <nav id="firstnav">
+            {{ if not .Site.Params.disableTextInHeader | default true }}
+            <a href="{{ "" | relLangURL }}">{{
+                .Site.Title | markdownify
+                | emojify }}</a>
+            {{ end }}
+        </nav>
+        <nav id="secoundnav">
+            {{ if .Site.Menus.main }}
+            {{ range .Site.Menus.main }}
+            {{ partial "header/header-option.html" . }}
+            {{ end }}
+            {{ end }}
+
+            {{ partial "translations.html" . }}
+
+            {{ if .Site.Params.enableSearch | default false }}
+            <button id="search-button" aria-label="Search" title="{{ i18n " search.open_button_title" }}">
+                {{ partial "icon.html" "search" }}
+            </button>
+            {{ end }}
+
+            <!-- Appearance switch  -->
+            {{ if .Site.Params.footer.showAppearanceSwitcher | default false }}
+            <div class="{{ if .Site.Params.footer.showScrollToTop | default true -}} ltr:mr-14 rtl:ml-14 {{- end }}"
+                id="switch">
+                <button id="appearance-switcher" aria-label="Dark mode switcher" type="button">
+                    <div id="moon">
+                        {{ partial "icon.html" "moon" }}
+                    </div>
+                    <div id="sun">
+                        {{ partial "icon.html" "sun" }}
+                    </div>
+                </button>
+            </div>
+            {{ end }}
+        </nav>
+    </div>
+
+    <div id="icons">
+        <span></span>
+        {{ partial "translations.html" . }}
+        {{ if .Site.Params.enableSearch | default false }}
+        <button id="search-button-mobile" aria-label="Search" title="{{ i18n " search.open_button_title" }}">
+            {{ partial "icon.html" "search" }}
+        </button>
+        {{ end }}
+        <!-- Appearance switch  -->
+        {{ if .Site.Params.footer.showAppearanceSwitcher | default false }}
+        <button id="appearance-switcher-mobile" aria-label="Dark mode switcher" type="button" style="margin-right:5px">
+            <div id="moon">
+                {{ partial "icon.html" "moon" }}
+            </div>
+            <div id="sun">
+                {{ partial "icon.html" "sun" }}
+            </div>
+        </button>
+        {{ end }}
+    </div>
+
+    <div id="menu">
+        <label id="menu-button" for="menu-controller">
+            <input type="checkbox" id="menu-controller" />
+            {{ if .Site.Menus.main }}
+            <div>
+                {{ partial "icon.html" "bars" }}
+            </div>
+            <div id="menu-wrapper" style="padding-top:5px;">
+                <ul>
+                    <li>
+                        <span>{{ partial "icon.html" "xmark" }}</span>
+                    </li>
+                    {{ range .Site.Menus.main }}
+                    {{ partial "header/header-mobile-option.html" . }}
+                    {{ end }}
+                </ul>
+                {{ if .Site.Menus.subnavigation }}
+                <hr>
+                <ul>
+                    {{ range .Site.Menus.subnavigation }}
+                    <li>
+                        <a href="{{ .URL }}" {{ if or (strings.HasPrefix .URL "http:" ) (strings.HasPrefix .URL "https:"
+                            ) }} target="_blank" {{ end }}>
+                            {{ if .Pre }}
+                            <span>
+                                {{ partial "icon.html" .Pre }}
+                            </span>
+                            {{ end }}
+                            <p title="{{ .Title }}">
+                                {{ .Name | markdownify | emojify }}
+                            </p>
+                        </a>
+                    </li>
+                    {{ end }}
+                </ul>
+                {{ end }}
+                {{ end }}
+            </div>
+        </label>
+    </div>
+</div>
+
+{{ if .Site.Menus.subnavigation }}
+<div {{ if .Site.Params.Logo }} style="margin-top:-15px" {{ end }} id="logo" class="main-menu">
+    <div>
+        {{ range .Site.Menus.subnavigation }}
+        <a href="{{ .URL }}" {{ if or (strings.HasPrefix .URL "http:" ) (strings.HasPrefix .URL "https:" ) }}
+            target="_blank" {{ end }}>
+            {{ if .Pre }}
+            <span {{ if and .Pre .Name}} {{ end }}>
+                {{ partial "icon.html" .Pre }}
+            </span>
+            <p title="{{ .Title }}">
+                {{ .Name | markdownify | emojify }}
+            </p>
+            {{ end }}
+        </a>
+        {{ end }}
+    </div>
+</div>
+{{ end }}
+
+{{ if .Site.Params.highlightCurrentMenuArea }}
+<script>
+    (function () {
+        var $mainmenu = $('.main-menu');
+        var path = window.location.pathname;
+        $mainmenu.find('a[href="' + path + '"]').each(function (i, e) {
+            $(e).children('p').addClass('active');
+        });
+    })();
+</script>
+{{ end }}
