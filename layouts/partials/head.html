@@ -1,7 +1,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 {{ with .Site.Language.Params.htmlCode | default .Site.LanguageCode }}
-<meta http-equiv="content-language" content="{{ . }}" />
+  <meta http-equiv="content-language" content="{{ . }}" />
 {{ end }}
 <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
@@ -18,62 +18,67 @@
 <meta property="og:site_name" content="{{ .Site.Params.sitename }}" />
 <!-- Title element with structured data for name -->
 <title itemprop="name">
-    {{ block "title" . }}
-    {{- .Title }} - {{ .Site.Title -}}
-    {{ end }}
+  {{ block "title" . }}
+    {{- .Title }} -
+    {{ .Site.Title -}}
+  {{ end }}
 </title>
 
 <!-- Page description -->
 {{ if .IsHome }}
-{{ with .Site.Params.Description }}
-<!-- Meta tag for page description -->
-<meta name="description" content="{{ . | safeHTML }}" />
-<!-- Meta tag for structured data description -->
-<meta itemprop="description" content="{{ . | safeHTML }}" />
-<!-- Open Graph meta tag for description -->
-<meta property="og:description" content="{{ . | safeHTML }}" />
-<!-- Twitter meta tag for description -->
-<meta name="twitter:description" content="{{ . | safeHTML }}" />
-{{ end }}
+  {{ with .Site.Params.Description }}
+    <!-- Meta tag for page description -->
+    <meta name="description" content="{{ . | safeHTML }}" />
+    <!-- Meta tag for structured data description -->
+    <meta itemprop="description" content="{{ . | safeHTML }}" />
+    <!-- Open Graph meta tag for description -->
+    <meta property="og:description" content="{{ . | safeHTML }}" />
+    <!-- Twitter meta tag for description -->
+    <meta name="twitter:description" content="{{ . | safeHTML }}" />
+  {{ end }}
 {{ else }}
-{{ with .Params.Description }}
-<!-- Meta tag for page description -->
-<meta name="description" content="{{ . | safeHTML }}" />
-<!-- Meta tag for structured data description -->
-<meta itemprop="description" content="{{ . | safeHTML }}" />
-<!-- Open Graph meta tag for description -->
-<meta property="og:description" content="{{ . | safeHTML }}" />
-<!-- Twitter meta tag for description -->
-<meta name="twitter:description" content="{{ . | safeHTML }}" />
+  {{ with .Params.Description }}
+    <!-- Meta tag for page description -->
+    <meta name="description" content="{{ . | safeHTML }}" />
+    <!-- Meta tag for structured data description -->
+    <meta itemprop="description" content="{{ . | safeHTML }}" />
+    <!-- Open Graph meta tag for description -->
+    <meta property="og:description" content="{{ . | safeHTML }}" />
+    <!-- Twitter meta tag for description -->
+    <meta name="twitter:description" content="{{ . | safeHTML }}" />
+  {{ end }}
 {{ end }}
-{{ end }}
+
 
 <!-- Page keywords -->
 {{ if .IsHome }}
-{{ with .Site.Params.Keywords }}
-<meta name="keywords" content="{{ delimit . " , " | safeHTML }}" />
-{{ end }}
+  {{ with .Site.Params.Keywords }}
+    <meta name="keywords" content="{{ delimit . " , " | safeHTML }}" />
+  {{ end }}
 {{ else if not .Params.Keywords }}
-<meta name="keywords" content="{{ .Title }} | {{ .Site.Title }}" />
+  <meta name="keywords" content="{{ .Title }} | {{ .Site.Title }}" />
 {{ else }}
-{{ with .Params.Keywords }}
-<meta name="keywords" content="{{ delimit . " , " | safeHTML }}" />
-{{ else }}
-<meta name="keywords" content="{{ .Title }} | {{ .Site.Title }}" />
+  {{ with .Params.Keywords }}
+    <meta name="keywords" content="{{ delimit . " , " | safeHTML }}" />
+  {{ else }}
+    <meta name="keywords" content="{{ .Title }} | {{ .Site.Title }}" />
+  {{ end }}
 {{ end }}
-{{ end }}
+
 
 <!-- Check if site-wide robots meta tag is defined  -->
 {{ with .Site.Params.robots }}
-<!-- Set site-wide robots meta tag -->
-<meta name="robots" content="{{ . }}" />
+  <!-- Set site-wide robots meta tag -->
+  <meta name="robots" content="{{ . }}" />
 {{ end }}
+
 
 <!-- Check if page-specific robots meta tag is defined  -->
 {{ with .Params.robots }}
-<!-- Set page-specific robots meta tag -->
-<meta name="robots" content="{{ . }}" />
+  <!-- Set page-specific robots meta tag -->
+  <meta name="robots" content="{{ . }}" />
 {{ end }}
+
 
 <!-- Base URL for resolving relative URLs -->
 <base href="{{ .Permalink }}" />
@@ -88,11 +93,13 @@
 
 <!-- Iterate over alternative output formats  -->
 {{ range .AlternativeOutputFormats -}}
-<!-- Generate HTML for alternative output format  -->
-{{ printf `
-<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .RelPermalink ($.Site.Title | emojify) |
-safeHTML }}
+  <!-- Generate HTML for alternative output format  -->
+  {{ printf `
+    <link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .RelPermalink ($.Site.Title | emojify) |
+    safeHTML
+  }}
 {{ end -}}
+
 
 <!-- Favicon Links -->
 <link rel="shortcut icon" href="/Favicons/favicon.ico" />
@@ -111,8 +118,8 @@ safeHTML }}
 
 {{/* Check if custom favicons partial exists */}}
 {{ if templates.Exists "partials/favicons.html" }}
-<!-- Include custom favicons partial  -->
-{{ partialCached "favicons.html" .Site }}
+  <!-- Include custom favicons partial  -->
+  {{ partialCached "favicons.html" .Site }}
 {{ end }}
 
 
@@ -120,27 +127,32 @@ safeHTML }}
 
 <!-- Google site verification  -->
 {{ with .Site.Params.verification.google }}
-<meta name="google-site-verification" content="{{ . }}" />
+  <meta name="google-site-verification" content="{{ . }}" />
 {{ end }}
+
 
 <!-- Bing site verification  -->
 {{ with .Site.Params.verification.bing }}
-<meta name="msvalidate.01" content="{{ . }}" />
+  <meta name="msvalidate.01" content="{{ . }}" />
 {{ end }}
+
 
 <!-- Pinterest site verification -->
 {{ with .Site.Params.verification.pinterest }}
-<meta name="p:domain_verify" content="{{ . }}" />
+  <meta name="p:domain_verify" content="{{ . }}" />
 {{ end }}
+
 
 <!-- Yandex site verification  -->
 {{ with .Site.Params.verification.yandex }}
-<meta name="yandex-verification" content="{{ . }}" />
+  <meta name="yandex-verification" content="{{ . }}" />
 {{ end }}
+
 
 <!-- Social  -->
 {{ template "_internal/opengraph.html" . }}
 {{ template "_internal/twitter_cards.html" . }}
+
 
 <!-- Schema  -->
 {{ partial "schema.html" . }}
@@ -148,32 +160,36 @@ safeHTML }}
 
 <!--  Set author meta tag -->
 {{ with .Site.Author.name }}
-<!-- Author name -->
-<meta name="author" content="{{ . }}" />
+  <!-- Author name -->
+  <meta name="author" content="{{ . }}" />
 {{ end }}
 <!-- Set rel="me" links  -->
 {{ with .Site.Author.links }}
-<!-- Iterate over each link -->
-{{ range $links := . }}
-<!-- Iterate over each name-url pair  -->
-{{ range $name, $url := $links }}
-<!-- "Me" link for social profiles -->
-<link href="{{ $url }}" rel="me" />
+  <!-- Iterate over each link -->
+  {{ range $links := . }}
+    <!-- Iterate over each name-url pair  -->
+    {{ range $name, $url := $links }}
+      <!-- "Me" link for social profiles -->
+      <link href="{{ $url }}" rel="me" />
+    {{ end }}
+  {{ end }}
 {{ end }}
-{{ end }}
-{{ end }}
+
 
 <!--  Include vendor dependencies  -->
 {{ partial "vendor.html" . }}
 
+
 <!-- Include main analytics script -->
 {{ partial "analytics/main.html" .Site }}
 
+
 <!-- Extend head - eg. for custom analytics scripts, etc. -->
 {{ if templates.Exists "partials/extend-head.html" }}
-<!--  Include custom extend-head partial -->
-{{ partialCached "extend-head.html" .Site }}
+  <!--  Include custom extend-head partial -->
+  {{ partialCached "extend-head.html" .Site }}
 {{ end }}
+
 
 <!-- Theme Color for browsers -->
 <meta name="theme-color" content="#3b3b3b" />
@@ -195,22 +211,23 @@ safeHTML }}
 <meta name="apple-touch-fullscreen" content="yes" />
 
 {{ with .Params.image }}
-<!-- Meta tag for structured data image -->
-<meta itemprop="image" content="{{ . | absURL }}" />
-<!-- Open Graph meta tag for image -->
-<meta property="og:image" content="{{ . | absURL }}" />
-<!-- Twitter meta tags for image -->
-<meta name="twitter:image" content="{{ . | absURL }}" />
-<meta name="twitter:image:src" content="{{ . | absURL }}" />
+  <!-- Meta tag for structured data image -->
+  <meta itemprop="image" content="{{ . | absURL }}" />
+  <!-- Open Graph meta tag for image -->
+  <meta property="og:image" content="{{ . | absURL }}" />
+  <!-- Twitter meta tags for image -->
+  <meta name="twitter:image" content="{{ . | absURL }}" />
+  <meta name="twitter:image:src" content="{{ . | absURL }}" />
 {{ else }}
-<!-- Meta tag for structured data image (fallback) -->
-<meta itemprop="image" content="{{ .Site.Params.og_image | absURL }}" />
-<!-- Open Graph meta tag for image (fallback) -->
-<meta property="og:image" content="{{ .Site.Params.og_image | absURL }}" />
-<!-- Twitter meta tags for image (fallback) -->
-<meta name="twitter:image" content="{{ .Site.Params.og_image | absURL }}" />
-<meta name="twitter:image:src" content="{{ .Site.Params.og_image | absURL }}" />
+  <!-- Meta tag for structured data image (fallback) -->
+  <meta itemprop="image" content="{{ .Site.Params.og_image | absURL }}" />
+  <!-- Open Graph meta tag for image (fallback) -->
+  <meta property="og:image" content="{{ .Site.Params.og_image | absURL }}" />
+  <!-- Twitter meta tags for image (fallback) -->
+  <meta name="twitter:image" content="{{ .Site.Params.og_image | absURL }}" />
+  <meta name="twitter:image:src" content="{{ .Site.Params.og_image | absURL }}" />
 {{ end }}
+
 
 <!-- Twitter meta tag for specifying the Twitter username of the site -->
 <meta name="twitter:site" content="{{ .Site.Params.twitter }}" />
@@ -222,11 +239,11 @@ safeHTML }}
 <meta property="fb:admins" content="{{ .Site.Params.facebookAdmins }}" />
 
 {{ if ne .Type "posts" }}
-<!-- Open Graph meta tag for specifying the type of content (website) -->
-<meta property="og:type" content="website" />
-<!-- Meta tag for specifying the author of the page -->
-<meta name="author" content="{{ .Site.Params.author }}" />
-<!-- JSON-LD structured data script for defining the website information -->
+  <!-- Open Graph meta tag for specifying the type of content (website) -->
+  <meta property="og:type" content="website" />
+  <!-- Meta tag for specifying the author of the page -->
+  <meta name="author" content="{{ .Site.Params.author }}" />
+  <!-- JSON-LD structured data script for defining the website information -->
 <script defer type="application/ld+json">
     {
       "@context": "http://schema.org",
@@ -253,45 +270,46 @@ safeHTML }}
   </script>
 {{ end }}
 
+
 <!-- To make sure this renders only in the article page, we check the section -->
 {{ if eq .Type "posts" }}
-<!-- Pagination meta tags for list pages only -->
-{{ $paginator := .Paginate (where .Pages "Section" "blog") }}
-{{ if $paginator }}
-<link rel="first" href="{{ $paginator.First.URL }}" />
-<link rel="last" href="{{ $paginator.Last.URL }}" />
-{{ if $paginator.HasPrev }}
-<link rel="prev" href="{{ $paginator.Prev.URL }}" />
-{{ end }}
-{{ if $paginator.HasNext }}
-<link rel="next" href="{{ $paginator.Next.URL }}" />
-{{ end }}
-{{ end }}
-<!-- Open Graph and meta tags for article pages -->
-<meta property="og:type" content="article" />
-<meta property="article:publisher" content="{{ .Site.Params.facebook }}" />
-<meta property="og:article:published_time" content="{{ .Date.Format " 2006-01-02T15:04:05Z0700" | safeHTML }}" />
-<meta property="article:published_time" content="{{ .Date.Format " 2006-01-02T15:04:05Z0700" | safeHTML }}" />
-<!-- Author meta tags -->
-{{ with .Params.author }}
-<meta property="og:article:author" content="{{ humanize . }}" />
-<meta property="article:author" content="{{ humanize . }}" />
-<meta name="author" content="{{ humanize . }}" />
-{{ end }}
-<!-- Category meta tags -->
-{{ with .Params.category }}
-<meta name="news_keywords" content="{{ index . 0 }}" />
-<meta property="article:section" content="{{ index . 0 }}" />
-{{ end }}
-{{ with .Params.series }}
-<meta name="news_keywords" content="{{ index . 0 }}" />
-<meta property="article:section" content="{{ index . 0 }}" />
-{{ end }}
-{{ with.Params.tags }}
-<meta name="news_keywords" content="{{ index . 0 }}" />
-<meta property="article:section" content="{{ index . 0 }}" />
-{{ end }}
-<!-- JSON-LD structured data for search engines -->
+  <!-- Pagination meta tags for list pages only -->
+  {{ $paginator := .Paginate (where .Pages "Section" "blog") }}
+  {{ if $paginator }}
+    <link rel="first" href="{{ $paginator.First.URL }}" />
+    <link rel="last" href="{{ $paginator.Last.URL }}" />
+    {{ if $paginator.HasPrev }}
+      <link rel="prev" href="{{ $paginator.Prev.URL }}" />
+    {{ end }}
+    {{ if $paginator.HasNext }}
+      <link rel="next" href="{{ $paginator.Next.URL }}" />
+    {{ end }}
+  {{ end }}
+  <!-- Open Graph and meta tags for article pages -->
+  <meta property="og:type" content="article" />
+  <meta property="article:publisher" content="{{ .Site.Params.facebook }}" />
+  <meta property="og:article:published_time" content="{{ .Date.Format " 2006-01-02T15:04:05Z0700" | safeHTML }}" />
+  <meta property="article:published_time" content="{{ .Date.Format " 2006-01-02T15:04:05Z0700" | safeHTML }}" />
+  <!-- Author meta tags -->
+  {{ with .Params.author }}
+    <meta property="og:article:author" content="{{ humanize . }}" />
+    <meta property="article:author" content="{{ humanize . }}" />
+    <meta name="author" content="{{ humanize . }}" />
+  {{ end }}
+  <!-- Category meta tags -->
+  {{ with .Params.category }}
+    <meta name="news_keywords" content="{{ index . 0 }}" />
+    <meta property="article:section" content="{{ index . 0 }}" />
+  {{ end }}
+  {{ with .Params.series }}
+    <meta name="news_keywords" content="{{ index . 0 }}" />
+    <meta property="article:section" content="{{ index . 0 }}" />
+  {{ end }}
+  {{ with.Params.tags }}
+    <meta name="news_keywords" content="{{ index . 0 }}" />
+    <meta property="article:section" content="{{ index . 0 }}" />
+  {{ end }}
+  <!-- JSON-LD structured data for search engines -->
 <script defer type="application/ld+json">
     {
         "@context": "http://schema.org",
@@ -329,17 +347,19 @@ safeHTML }}
 </script>
 {{ end }}
 
+
 <!-- Open Graph updated time meta tag -->
 <meta property="og:updated_time" content="{{ .Lastmod.Format " 2006-01-02T15:04:05Z0700" | safeHTML }}" />
 <!-- Sitemap link meta tag -->
 <link rel="sitemap" type="application/xml" title="Sitemap" href="{{ .Site.BaseURL }}sitemap.xml" />
 {{ with .OutputFormats.Get "RSS" }}
-<!-- RSS feed links for alternate and feed -->
-<link href="{{ .Permalink }}" rel="alternate" type="application/rss+xml" title="{{ $.Site.Title }}" />
-<link href="{{ .Permalink }}" rel="feed" type="application/rss+xml" title="{{ $.Site.Title }}" />
+  <!-- RSS feed links for alternate and feed -->
+  <link href="{{ .Permalink }}" rel="alternate" type="application/rss+xml" title="{{ $.Site.Title }}" />
+  <link href="{{ .Permalink }}" rel="feed" type="application/rss+xml" title="{{ $.Site.Title }}" />
 {{ end }}
 
-<link rel="manifest" href="/manifest.json">
+
+<link rel="manifest" href="/manifest.json" />
 
 <!-- Styles -->
 {{ partialCached "head/css.html" . }}

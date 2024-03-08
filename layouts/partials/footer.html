@@ -1,62 +1,63 @@
 <!-- Footer menu  -->
 {{ if .Site.Params.footer.showMenu | default true }}
-{{ if .Site.Menus.footer }}
-<nav>
-    <ul>
+  {{ if .Site.Menus.footer }}
+    <nav>
+      <ul>
         {{ range .Site.Menus.footer }}
-        <li>
+          <li>
             <a href="{{ .URL }}" title="{{ .Title }}">
-                {{ if .Pre }}
-                <span {{ if and .Pre .Name}} {{ end }}>
-                    {{ partial "icon.html" .Pre }}
+              {{ if .Pre }}
+                <span {{ if and .Pre .Name }}{{ end }}>
+                  {{ partial "icon.html" .Pre }}
                 </span>
-                {{ end }}
-                {{ .Name | markdownify | emojify }}
+              {{ end }}
+              {{ .Name | markdownify | emojify }}
             </a>
-        </li>
+          </li>
         {{ end }}
-    </ul>
-</nav>
-{{ end }}
+      </ul>
+    </nav>
+  {{ end }}
 {{ end }}
 <div>
-
-    <!-- Copyright  -->
-    {{ if .Site.Params.footer.showCopyright | default true }}
+  <!-- Copyright  -->
+  {{ if .Site.Params.footer.showCopyright | default true }}
     <p>
-        {{- with replace .Site.Params.copyright "{ year }" now.Year }}
+      {{- with replace .Site.Params.copyright "{ year }" now.Year }}
         {{ . | emojify | markdownify }}
-        {{- else }}
+      {{- else }}
         &copy;
         {{ now.Format "2006" }}
         {{ .Site.Params.author | markdownify | emojify }}
-        {{- end }}
+      {{- end }}
     </p>
-    {{ end }}
+  {{ end }}
 
-    <!-- Theme attribution  -->
-    {{ if .Site.Params.footer.showThemeAttribution | default true }}
+
+  <!-- Theme attribution  -->
+  {{ if .Site.Params.footer.showThemeAttribution | default true }}
     <p>
-        {{ $hugo := printf `<a href="https://gohugo.io/" target="_blank" rel="noopener noreferrer">Hugo</a>`
-        }}
-        {{ $blowfish := printf `<a href="https://blowfish-extended.netlify.app/" target="_blank"
-            rel="noopener noreferrer">Blowfish</a>` }}
-        {{ i18n "footer.powered_by" (dict "Hugo" $hugo "Theme" $blowfish) | safeHTML }}
+      {{ $hugo := printf `<a href="https://gohugo.io/" target="_blank" rel="noopener noreferrer">Hugo</a>` }}
+      {{ $blowfish := printf `<a href="https://blowfish-extended.netlify.app/" target="_blank"
+        rel="noopener noreferrer">Blowfish</a>`
+      }}
+      {{ i18n "footer.powered_by" (dict "Hugo" $hugo "Theme" $blowfish) | safeHTML }}
     </p>
-    {{ end }}
+  {{ end }}
 </div>
 
 {{ if not .Site.Params.disableImageZoom | default true }}
-<script>
-    mediumZoom(document.querySelectorAll("img:not(.nozoom)"), {
-        margin: 24,
-        background: 'rgba(0,0,0,0.5)',
-        scrollOffset: 0,
+  <script>
+    mediumZoom(document.querySelectorAll('img:not(.nozoom)'), {
+      margin: 24,
+      background: 'rgba(0,0,0,0.5)',
+      scrollOffset: 0,
     })
-</script>
+  </script>
 {{ end }}
+
 
 <!--  Extend footer - eg. for extra scripts, etc. -->
 {{ if templates.Exists "partials/extend-footer.html" }}
-{{ partialCached "extend-footer.html" . }}
+  {{ partialCached "extend-footer.html" . }}
 {{ end }}

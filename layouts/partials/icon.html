@@ -1,6 +1,6 @@
 {{ $icon := resources.Get (print "icons/" . ".svg") }}
 {{ if $icon }}
-<span class="relative block icon">
+  <span class="icon relative block">
     {{ $icon.Content | safeHTML }}
-</span>
+  </span>
 {{ end }}

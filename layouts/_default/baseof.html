@@ -1,141 +1,136 @@
-<!DOCTYPE html>
-<html lang="{{ with .Site.Params.isoCode | default (.Site.LanguageCode | default " en") }} {{- . -}} {{ end }}" dir="{{ if .Site.Params.rtl | default false -}}
+<!doctype html>
+<html
+  lang="{{ with .Site.Params.isoCode | default (.Site.LanguageCode | default " en") }}{{- . -}}{{ end }}"
+  dir="{{ if .Site.Params.rtl | default false -}}
     rtl
   {{- else -}}
     ltr
-  {{- end }}" class="scroll-smooth" data-default-appearance="{{ .Site.Params.defaultAppearance | default " light" }}"
-  data-auto-appearance="{{ .Site.Params.autoSwitchAppearance | default " true" }}">
+  {{- end }}"
+  class="scroll-smooth"
+  data-default-appearance="{{ .Site.Params.defaultAppearance | default " light" }}"
+  data-auto-appearance="{{ .Site.Params.autoSwitchAppearance | default " true" }}"
+>
+  <head>
+    {{ partial "head.html" . }}
+  </head>
 
-<head>
-  {{ partial "head.html" . }}
-</head>
-
-<body>
-
-  <div id="the-top">
-    <a href="#main-content"><span>&darr;</span>{{ i18n "nav.skip_to_main" }}</a>
-  </div>
-  {{ $header := print "partials/header/" .Site.Params.header.layout ".html" }}
-  {{ if templates.Exists $header }}
-  {{ partial $header . }}
-  {{ else }}
-  {{ partial "partials/header/basic.html" . }}
-  {{ end }}
-
-  <div id="main">
-    <main id="main-content">
-      {{ block "main" . }}{{ end }}
-      {{ if and (.Site.Params.footer.showScrollToTop | default true) (gt .WordCount 1) }}
-      {{- partial "scroll-to-top.html" . -}}
-      {{ end }}
-    </main>
-    <footer id="site-footer">
-      {{ partial "footer.html" . }}
-    </footer>
-    {{ if .Site.Params.enableSearch | default false }}
-    {{- partial "search.html" . -}}
+  <body>
+    <div id="the-top">
+      <a href="#main-content"><span>&darr;</span>{{ i18n "nav.skip_to_main" }}</a>
+    </div>
+    {{ $header := print "partials/header/" .Site.Params.header.layout ".html" }}
+    {{ if templates.Exists $header }}
+      {{ partial $header . }}
+    {{ else }}
+      {{ partial "partials/header/basic.html" . }}
     {{ end }}
-  </div>
 
-  <!-- Banner for PWA installation -->
-  <div id="installBanner" class="fixed bottom-0 left-0 right-0 flex items-center justify-center" style="display: none;">
-    <div
-      class="flex max-sm:flex-col items-center justify-center bg-primary-100 text-neutral-900 dark:bg-primary-800 dark:text-neutral px-6 py-3.5 rounded-md font-[sans-serif] my-3">
-      <p class="text-base">Get the best experience with our app! Install now.</p>
-      <div class="max-sm:mt-4 sm:ml-6 flex gap-4">
-        <button type="button" onclick="installPWA()"
-          class="bg-primary-300 dark:bg-primary-900 text-white font-semibold py-2 px-4 rounded text-sm hover:bg-slate-100">
-          Install
-        </button>
-        <button type="button" onclick="dismissBanner()"
-          class="bg-primary-300 dark:bg-primary-900 text-white font-semibold py-2 px-4 rounded text-sm hover:bg-slate-100">
-          Cancel
-        </button>
+
+    <div id="main">
+      <main id="main-content">
+        {{ block "main" . }}{{ end }}
+        {{ if and (.Site.Params.footer.showScrollToTop | default true) (gt .WordCount 1) }}
+          {{- partial "scroll-to-top.html" . -}}
+        {{ end }}
+      </main>
+      <footer id="site-footer">
+        {{ partial "footer.html" . }}
+      </footer>
+      {{ if .Site.Params.enableSearch | default false }}
+        {{- partial "search.html" . -}}
+      {{ end }}
+    </div>
+
+    <!-- Banner for PWA installation -->
+    <div id="installBanner" style="display: none;">
+      <div id="content">
+        <p>Get the best experience with our app! Install now.</p>
+        <div id="buttons">
+          <button type="button" onclick="installPWA()">Install</button>
+          <button type="button" onclick="dismissBanner()">Cancel</button>
+        </div>
       </div>
     </div>
-  </div>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      // Check if there is a value stored in localStorage
-      const dismissalTimestamp = localStorage.getItem('dismissalTimestamp');
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        // Check if there is a value stored in localStorage
+        const dismissalTimestamp = localStorage.getItem('dismissalTimestamp')
 
-      // If there is no value stored, display the banner
-      if (!dismissalTimestamp) {
-        document.getElementById('installBanner').style.display = 'block';
-      }
-    });
+        // If there is no value stored, display the banner
+        if (!dismissalTimestamp) {
+          document.getElementById('installBanner').style.display = 'block'
+        }
+      })
 
-    let deferredPrompt;
+      let deferredPrompt
 
-    // Function to install the PWA
-    function installPWA() {
-      if (deferredPrompt) {
-        // Show the installation prompt
-        deferredPrompt.prompt();
+      // Function to install the PWA
+      function installPWA() {
+        if (deferredPrompt) {
+          // Show the installation prompt
+          deferredPrompt.prompt()
 
-        // Wait for the user to respond to the prompt
-        deferredPrompt.userChoice
-          .then((choiceResult) => {
+          // Wait for the user to respond to the prompt
+          deferredPrompt.userChoice.then((choiceResult) => {
             if (choiceResult.outcome === 'accepted') {
               // User accepted the prompt
-              console.log('User accepted the install prompt');
+              console.log('User accepted the install prompt')
             } else {
               // User dismissed the prompt
-              console.log('User dismissed the install prompt');
+              console.log('User dismissed the install prompt')
             }
 
             // Clear the deferredPrompt variable
-            deferredPrompt = null;
-          });
+            deferredPrompt = null
+          })
+        }
       }
-    }
 
-    // Function to dismiss the banner and hide it for 7 days
-    function dismissBanner() {
-      // Hide the banner
-      document.getElementById('installBanner').style.display = 'none';
+      // Function to dismiss the banner and hide it for 7 days
+      function dismissBanner() {
+        // Hide the banner
+        document.getElementById('installBanner').style.display = 'none'
 
-      // Store the dismissal timestamp in local storage
-      localStorage.setItem('dismissalTimestamp', Date.now());
-    }
-
-    // Check if the banner should be displayed
-    function checkBanner() {
-      const dismissalTimestamp = localStorage.getItem('dismissalTimestamp');
-      const currentTime = Date.now();
-      const sevenDaysInMilliseconds = 7 * 24 * 60 * 60 * 1000;
-
-      // If the banner was dismissed less than 7 days ago, hide it
-      if (dismissalTimestamp && currentTime - dismissalTimestamp < sevenDaysInMilliseconds) {
-        document.getElementById('installBanner').style.display = 'none';
-      } else {
-        // If the banner is shown, hide it after 8.5 seconds
-        setTimeout(dismissBanner, 8500);
+        // Store the dismissal timestamp in local storage
+        localStorage.setItem('dismissalTimestamp', Date.now())
       }
-    }
-
-    // Listen for the beforeinstallprompt event
-    window.addEventListener('beforeinstallprompt', (event) => {
-      // Prevent the default behavior of the event
-      event.preventDefault();
-      // Store the event to use later
-      deferredPrompt = event;
 
       // Check if the banner should be displayed
-      checkBanner();
-    });
+      function checkBanner() {
+        const dismissalTimestamp = localStorage.getItem('dismissalTimestamp')
+        const currentTime = Date.now()
+        const sevenDaysInMilliseconds = 7 * 24 * 60 * 60 * 1000
 
-    // Listen for the appinstalled event to hide the banner after installation
-    window.addEventListener('appinstalled', (event) => {
-      // Hide the banner after the app is installed
-      document.getElementById('installBanner').style.display = 'none';
-    });
+        // If the banner was dismissed less than 7 days ago, hide it
+        if (dismissalTimestamp && currentTime - dismissalTimestamp < sevenDaysInMilliseconds) {
+          document.getElementById('installBanner').style.display = 'none'
+        } else {
+          // If the banner is shown, hide it after 8.5 seconds
+          setTimeout(dismissBanner, 8500)
+        }
+      }
 
-    // Call checkBanner when the page loads to ensure the banner state is correct
-    window.onload = checkBanner;
-  </script>
-  {{ partialCached "head/js.html" . }}
-</body>
+      // Listen for the beforeinstallprompt event
+      window.addEventListener('beforeinstallprompt', (event) => {
+        // Prevent the default behavior of the event
+        event.preventDefault()
+        // Store the event to use later
+        deferredPrompt = event
 
+        // Check if the banner should be displayed
+        checkBanner()
+      })
+
+      // Listen for the appinstalled event to hide the banner after installation
+      window.addEventListener('appinstalled', (event) => {
+        // Hide the banner after the app is installed
+        document.getElementById('installBanner').style.display = 'none'
+      })
+
+      // Call checkBanner when the page loads to ensure the banner state is correct
+      window.onload = checkBanner
+    </script>
+    {{ partialCached "head/js.html" . }}
+  </body>
 </html>
