@@ -110,4 +110,11 @@
             }
         }
     }
+
+    #mobile {
+        @apply mt-1;
+        a {
+            @apply hover:text-primary-600 dark:hover:text-primary-400 flex items-center text-gray-500;
+        }
+    }
 }
